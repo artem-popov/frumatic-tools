@@ -1,5 +1,5 @@
 /**
- * Frumatic Js Tools v1.0 (c) Frumatic. 
+ * Frumatic JS Tools v1.0 (c) Frumatic.
  * copyright & respect to code authors.
  * 
  * List of implemented tools:
@@ -10,6 +10,8 @@
  * Fade2
  * Simple JavaScript Inheritance
  * Crossbrowser console.log
+ *
+ * Array.filter
  * 
  */
 
@@ -20,6 +22,12 @@ if (!$)
 	$ = jQuery.noConflict();
 
 /**
+ * Javascript array forEach() method calls a function for each element in the array.
+ *
+ * array.forEach(callback[, thisObject]);
+ * @param callback : Function to test each element of the array.
+ * @param thisObject : Object to use as this when executing callback.
+ *
  * Follow modern ECMAScript
  * Author:http://www.tutorialspoint.com/javascript/array_foreach.htm
  */
@@ -200,3 +208,28 @@ if (!window.log) {
 		}
 	}
 }
+
+/**
+ * @todo Description and test this feature.
+ *
+ * Filter Array.
+ * Returns an array of items for which the function returns true.
+ *
+ * array.filter( fn );
+ * @param fn : Function to check each element of the array.
+ */
+if (!Array.prototype.filter) {
+	Array.prototype.filter = function(/* function */ predicate) {
+		if (typeof predicate != "function") throw new TypeError();
+		var results = [], len = this.length;;
+		for (var i = 0; i < len; i++){
+			var e = this[i];
+			if(predicate(e)) results.push(e);
+		}
+		return results;
+	}
+};
+
+/**
+ @todo array.map
+ */
