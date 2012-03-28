@@ -233,3 +233,26 @@ if (!Array.prototype.filter) {
 /**
  @todo array.map
  */
+
+
+/**
+ * Action methods implement a system of event and their calls
+ */
+(function(){
+    action = {
+        list: {},
+        add: function(event, fn){
+            if(arguments.length < 2) return true; // try exception
+            if(this.list[event] == undefined) this.list[event] = [];
+            this.list[event].push(fn);
+            return true;
+        },
+    do: function(event){
+        if(this.list.hasOwnProperty(event) && this.list[event].length){
+            for(var i = 0; i < this.list[event].length; i++)
+                this.list[event][i].call();
+        }
+        return true;
+    }
+};
+})();
